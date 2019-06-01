@@ -1,0 +1,61 @@
+conexion con bbdd utilizando pdo
+
+1. como crear un objto de tipo pdo
+2. establecerle a la bbdd que genere el objeto error
+3. funcion para establecer el tipo de caracteres a utilizar
+4. crear el prepare statement (pdoStatement)
+5. pasarle los parametros al prepare y ejecutar la consulta con y sin marcadores(clase)
+6. funcion para recorer lo debuelto tras una consulta(parametro, clase)
+7. cerrar el cursor(clase)
+
+
+
+
+
+<?php
+
+   $c_art = $_GET["c_art"];
+   $secc = $_GET["secc"];
+   $n_art = $_GET["n_art"];
+   $pre = $_GET["pre"];
+   $fec = $_GET["fec"];
+   $imp = $_GET["imp"];
+   $p_ori = $_GET["p_ori"];
+
+try{
+
+$base = new PDO("mysql:host=localHost; dbname=curso_sql", "root","");                                  // 1
+
+$base->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // necesario para que los mensages del objeto exception salgan. le decimos al gdbc que genere el objeto error                                                                                             // 2
+  
+ $base->exec("SET CHARACTER SET utf8");                                                                               // 3
+
+ $sql="INSERT INTO PRODUCTOS2 (CODIGOARTICULO,SECCION,NOMBREARTICULO,PRECIO,FECHA,IMPORTADO,PAISDEORIGEN) VALUES(:codigo,:seccion,:nombre,:precio,:fecha,:import,:pais)";
+
+ $resultado = $base->prepare($sql); // debuelve un objeto de tipo pdoStatement                         // 4
+
+ $resultado->execute(array(":codigo"=>$c_art,":seccion"=>$secc,":nombre"=>$n_art,":precio"=>$pre,":fecha"=>$fec,":import"=>$imp,":pais"=>$p_ori));  // pasamos el parametro a la consulta y la ejecutamos                                                                                 // 5
+
+   echo "Datos insertados correctamente";
+  $resultado->closeCursor();                                                                   // 7
+}catch(Exception $e){
+   die('Error: ' . $e->GetMessage() . 'Linea: ' . $e->getLine());
+
+}finally{
+ $base = null;
+}
+
+?>
+
+
+=============================================
+ $resultado->execute(array(":secc"=>$busqueda_sec, ":p_origen"=>$busqueda_pais));  // pasamos el parametro a la consulta y la ejecutamos
+
+
+ while ($registro = $resultado->fetch(PDO::FETCH_ASSOC)) { // recorec                                            // 6
+      
+      echo $registro["CODIGOARTICULO"] . " ";
+      echo $registro["SECCION"] . " ";
+      echo $registro["NOMBREARTICULO"];
+      echo "<br>";
+ } 

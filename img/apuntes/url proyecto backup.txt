@@ -1,0 +1,12 @@
+https://www.rgagnon.com/javadetails/java-0490.html
+
+https://www.rgagnon.com/javadetails/java-detect-file-modification-event.html
+
+
+---
+https://stackoverflow.com/questions/1390592/check-if-file-is-already-open
+https://stackoverflow.com/questions/5953525/run-java-application-at-windows-startup
+https://www.journaldev.com/861/java-copy-file   // copiar documentos
+
+---java thread
+https://www.journaldev.com/1016/java-thread-example

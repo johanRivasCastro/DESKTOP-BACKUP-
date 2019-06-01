@@ -1,0 +1,64 @@
+conectar con msqli utilizando poo
+
+
+1. como crear un objeto de tipo msqli
+2. funcion para establecer la bbdd con la que se realizara la conexion(clase)
+3. funcion para establecer el tipo de caracteres a manejar(clase, espanol)
+4. funcion para crear consulta preparda (parametro, que debuelve)
+5. funcion para pasar parametros a la consulta preparada(clase, parametros, que debuelve)
+6. funcion para ejecutar la consulta preparada(clase, que debuelve)
+7. funcion para asociar variables al resultado de la consulta(clase, que debuelve)
+8. funcion para recorer los resultados debueltos
+
+
+
+
+
+
+<?php
+   
+   $pais = $_GET["pais"];
+   
+   require("38.datosConexion.php");
+
+   $conexion = new mysqli($db_host,$db_usuario,$db_contra); // creamos la conexion con la bbdd                           // 1
+
+   if($conexion->connect_errno){
+        
+        echo "Error al intentar conectar con la BBDD";
+        exit();
+   }else{
+
+    $conexion->select_db($db_nombre) or die("no se encuentra la BBDD $db_nombre");                              // 2
+
+    $conexion->set_charset("utf8");                                                                                                                       // 3
+ 
+
+    $consulta="SELECT CODIGOARTICULO, SECCION, NOMBREARTICULO, PAISDEORIGEN FROM PRODUCTOS2 WHERE PAISDEORIGEN = ?";
+    
+    $resultado = $conexion->prepare($consulta); // creamos el prepareStatement. debuelve un objeto de tipo stmt                                           // 4
+     
+    $ok = $resultado->bind_param("s", $pais); // pasamos el parametro a la consulta                                                             // 5
+
+    $ok = $resultado->execute(); // ejcutamos la consulta                                                                                         //  6
+
+    if($ok == false){
+ 
+          echo "error al ejecutar la consulta";
+    }else{
+
+         $ok = $resultado->bind_result($codigo, $seccion, $nombre, $pais);  // asociamos variables al resultado de la consulta                  // 7
+
+         echo "Articulos encontrados:<br><br>";
+ 
+         while($resultado->fetch()){   // recoremos los valores debueltos                                              // 8         
+             
+             echo $codigo . " " . $seccion . " " . $nombre . " " . $pais . "<br>";
+         }
+    }
+   
+  
+   $conexion->close();
+
+}
+?>

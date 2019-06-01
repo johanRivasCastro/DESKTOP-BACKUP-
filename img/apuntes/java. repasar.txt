@@ -1,0 +1,12 @@
+-  practica procesador de texto
+
+- slider
+
+
+- procesador de texto 2
+
+
+-sockets
+
+
+-Curso Java. JSP X. Sesiones I. Vídeo 237

@@ -1,0 +1,10 @@
+Website for lapractica.epizy.com
+
+sflNBlCopdAU
+
+--------------------------------------------
+
+FTP Username	                epiz_22098538
+FTP Password	                sflNBlCopdAU
+FTP Hostname	                ftpupload.net
+FTP Port (optional) 	21

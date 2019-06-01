@@ -1,0 +1,60 @@
+115. disposiciones avanzadas 1.
+
+1. clase para establecer disposicion en cajas/ cajas a modo de contenedor.
+2. metodo para crear una caja orizontal(que debuelve).
+3. metodo para crear una caja vertical(que debuelve).
+4. metodo para crear un espaciado entre los elemento de una caja de tipo 3 / 4(clase,parametro).
+5. metodo para adaptar los componentes internos cuando se redimenciona el marco(clase)
+6. establecer un tamano maximo para un cuadro de texto de tipo JTextField(metodo importante para que el JTextField no se decuadre)(clase, parametro).
+
+================================
+
+Constructor and Description                      
+Box(int axis)                                                                                               // 1
+Creates a Box that displays its components along the the specified axis.
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+class MarcoCaja extends JFrame{
+ 
+ public MarcoCaja() {                                                                                
+ 
+ setBounds(400,300,300,200);                           
+ 
+ JLabel rotulo1 = new JLabel("nombre");                                                    
+ JTextField texto1 = new JTextField(10);
+ 
+ texto1.setMaximumSize(texto1.getPreferredSize());                                        // 6
+ 
+ Box cajaH1 = Box.createHorizontalBox();
+ cajaH1.add(rotulo1);
+ cajaH1.add(Box.createHorizontalStrut(10));                                                     // 4
+ cajaH1.add(texto1);
+ 
+ 
+ JLabel rotulo2 = new JLabel("contrasena");
+ JTextField texto2 = new JTextField(10);
+  
+ texto2.setMaximumSize(texto1.getPreferredSize());
+ 
+ Box cajaH2 = Box.createHorizontalBox();                                                          // 2
+ cajaH2.add(rotulo2);
+ cajaH2.add(Box.createHorizontalStrut(10));
+ cajaH2.add(texto2);
+ 
+ JButton boton1 = new JButton("cancelar");
+ JButton boton2 = new JButton("enviar");
+ 
+ Box cajaH3 = Box.createHorizontalBox();
+ cajaH3.add(boton1);
+ cajaH3.add(Box.createGlue());                                                                        // 5
+ cajaH3.add(boton2);
+ 
+ Box cajaVertical = Box.createVerticalBox();                                                       // 3
+ cajaVertical.add(cajaH1);
+ cajaVertical.add(cajaH2);
+ cajaVertical.add(cajaH3);
+ 
+ add(cajaVertical, BorderLayout.CENTER);
+ }
+}

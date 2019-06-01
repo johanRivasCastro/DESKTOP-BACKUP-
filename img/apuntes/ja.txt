@@ -1,0 +1,5 @@
+Sockets VIII Creación de chat VI. Vídeo 197.
+
+1. metodo que debuelve la direccion a la que un socket esta conectado(clase, que debuelve ?).
+2. metodo que debuelve la direccion ip en string del host al que estamos conectados(a quien pertenece ?) 
+3. metodo para borrar todos los items en un JcomboBox
